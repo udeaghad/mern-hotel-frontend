@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  color: #2d2d2d;
+}
+
+.App {
+  background-color: #fffbf0;
+}
+
+
+.card {
+    min-width: 70%;
+    /* border: 2px solid; */
+    /* border-top-left-radius: 3rem;
+    border-top-right-radius: 3rem; */
+    margin-top: 1rem;
+    border: none;
+    background-color: #fffbf0;
+    
+}
+
+.hotel_name {
+  text-align: center;
+  margin: 1rem;
+  font-size: 1.2rem;
+  color: #943d24;
+  font-weight: bold;
+}
+
+.city_name {
+  text-align: center;
+  font-size: 1rem;
+}
+
+.desc {
+  font-size: 0.8rem;
+  font-family: 'Pacifico', cursive;
+}
+
+.heading_text {
+  font-family: 'Pacifico', cursive;
+  margin-left: 5%;
+    font-size: 24px;
+}
+
+.img_container {
+  width: 100%;
+}
+
+.img_container img {
+  width: 100%;
+  pointer-events: none;
+}
+
+.button {
+  background-color: #943d24;
+  border: none;
+  color: white;
+  padding: 5px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin-top: 5%;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  /* width: 100% */
+}
+
+.button:hover {
+  background-color: #6a210d;
+  color: white;
+}
+
+.btn_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5% 0;
+}
+
+.view_button {
+  background-color: none;
+  border: none;
+  color: #943d24;
+  /* padding: 16px 32px; */
+  text-align: center;
+  text-decoration: none;
+
+}
+
+.inner-carousel {
+  display: flex;
+  gap: 5%;
+}
+
+.container-carousel {
+  cursor: grab;
+  overflow: hidden;
+}
+.main_card_container {
+  margin: 0 5%;
+}
+
+.detail_container {
+  margin: 0 5%;
+}
+
+.hotel_details {
+  color: #943d24;
+  margin-top: 0.3rem;
+}
+
+.detail_group {
+  display: flex;
+    flex-direction: column;
+}
+
+.preview_img {
+  width: 70%;
+  border: 1px solid #943d24;
+  border-radius: 5px;
+  margin: 0 5%;
+  
+}
+
+.hotel_form,
+.sign_in_form {
+  margin: 0 7%;
+    display: flex;
+    flex-direction: column;
+}
+
+.name_label {
+  width: 100%;
+  
+}
+
+.create_button {
+  background-color: #943d24;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 0%;
+    transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 5px;
+  /* width: 100% */
+}
+
+.create_button:hover {
+  background-color: #6a210d;
+  color: white;
+}
+
+.room_details {
+  display: flex;
+    flex-direction: column;
+}
+
+.room_details span {
+  font-size: small;
+}
+
+/* .reserve_container {
+  border-top: 2px solid #943d24;
+} */
+
+.hotel_details_container {
+  display: flex;
+    gap: 10px;
+    margin: 5%;
+    border-bottom: 2px solid #943d24;
+    
+}
+
+.hotel_img_container {
+  width: 50%;
+}
+
+.hotel_info_container {
+  width: 50%;
+}
+
+.hotel_info_container p {
+  font-size: small;
+  color: #6a210d;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.form-group {
+  margin: 3% 0;
+}
