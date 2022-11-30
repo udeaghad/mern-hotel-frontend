@@ -73,7 +73,7 @@ const BookHotel = () => {
           </span>
         </div>
 
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className="form_cont_desk">
           <div className="form-group">
             <label htmlFor="date" className="date_label">
               Choose Date

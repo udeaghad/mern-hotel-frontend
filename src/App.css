@@ -218,7 +218,7 @@
 
   .detail_group {
     margin-left: 25%;
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .room_details span {
@@ -263,6 +263,6 @@
   }
 
   .hotel_info_container p {
-    font-size: 18px;
+    font-size: 20px;
   }
 }
