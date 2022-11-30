@@ -1,5 +1,5 @@
 [![](https://img.shields.io/badge/Microverse-Dozie%20Udeagha-blueviolet)](https://github.com/udeaghad)
-## Hotel Reservstion 🏩
+## Hotel Reservation(Front End) 🏩
 This application, even though it is WIP, is a web application to also find your favorite Hotel around the world and reserve it for a specific date, find information about a hotel at details page and cancel a reservation.
 
 ## Project Documentation 📄
