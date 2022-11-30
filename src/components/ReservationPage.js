@@ -10,7 +10,7 @@ const ReservationPage = () => {
 
   useEffect(() => {
     // eslint-disable-next-line
-    axios.get(`http://localhost:5000/api/v1/reservations/${user._id}`, { withCredentials: true })
+    axios.get(`https://booooka-api.onrender.com/api/v1/reservations/${user._id}`, { withCredentials: true })
       .then((res) => {
         const { data } = res;
         setReservations(data);
@@ -22,7 +22,7 @@ const ReservationPage = () => {
 
   const handleDelete = (e) => {
     e.preventDefault();
-    axios.delete(`http://localhost:5000/api/v1/reservations/${e.target.id}`, { withCredentials: true });
+    axios.delete(`https://booooka-api.onrender.com/api/v1/reservations/${e.target.id}`, { withCredentials: true });
     // eslint-disable-next-line
     setReservations(reservations.filter((reservation) => reservation._id !== e.target.id));
   };

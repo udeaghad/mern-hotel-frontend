@@ -26,7 +26,7 @@ const SignInPage = () => {
     e.preventDefault();
 
     try {
-      await axios.post('http://localhost:5000/api/v1/auths/login', body, { withCredentials: true })
+      await axios.post('https://booooka-api.onrender.com/api/v1/auths/login', body, { withCredentials: true })
         .then((res) => {
           const { data } = res;
 

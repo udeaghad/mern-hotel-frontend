@@ -25,7 +25,7 @@ const HomePage = () => {
   const handleDelete = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.delete(`http://localhost:5000/api/v1/hotels/${e.target.id}`, { withCredentials: true });
+      const res = await axios.delete(`https://booooka-api.onrender.com/api/v1/hotels/${e.target.id}`, { withCredentials: true });
       const data = await res.data;
 
       setMsg(data);

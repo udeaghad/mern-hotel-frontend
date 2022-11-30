@@ -9,7 +9,7 @@ const DELETE_ROOM = 'DELETE_ROOM';
 const getHotels = createAsyncThunk(
   GET_HOTEL,
   async (hotelId) => {
-    const response = await fetch(`http://localhost:5000/api/v1/hotels/${hotelId}`);
+    const response = await fetch(`https://booooka-api.onrender.com/api/v1/hotels/${hotelId}`);
     const data = await response.json();
     return data;
   },
@@ -18,7 +18,7 @@ const getHotels = createAsyncThunk(
 const getAllHotels = createAsyncThunk(
   GET_ALL_HOTELS,
   async () => {
-    const res = await axios.get('http://localhost:5000/api/v1/hotels');
+    const res = await axios.get('https://booooka-api.onrender.com/api/v1/hotels');
     const data = await res.data;
     return data;
   },

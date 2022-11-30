@@ -52,7 +52,7 @@ const CreateRoom = () => {
     formData.append('photos', file.data);
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/v1/rooms/${chooseHotel}`, formData, { withCredentials: true },
+        `https://booooka-api.onrender.com/api/v1/rooms/${chooseHotel}`, formData, { withCredentials: true },
         { headers: { 'Content-Type': 'multipart/form-data' } },
       );
       const data = await res.data;

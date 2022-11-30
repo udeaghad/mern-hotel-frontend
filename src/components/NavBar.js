@@ -17,7 +17,7 @@ const NavBar = () => {
 
     dispatch(getUser(null));
     try {
-      await axios.post('http://localhost:5000/api/v1/auths/logout', { withCredentials: true });
+      await axios.post('https://booooka-api.onrender.com/api/v1/auths/logout', { withCredentials: true });
     } catch (error) {
       throw new Error(error.message);
     }
@@ -27,7 +27,7 @@ const NavBar = () => {
     <Navbar bg="primary" expand="lg" variant="dark">
       <Container>
         <Navbar.Brand href="/">BOOooKa.com</Navbar.Brand>
-        <AccountCircle />
+        <AccountCircle style={{ color: 'white' }} />
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
