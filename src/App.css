@@ -185,3 +185,85 @@
 .form-group {
   margin: 3% 0;
 }
+
+@media screen and (min-width: 768px) {
+  .card {
+    min-width: 36%;
+  }
+
+  .heading_text {    
+    font-size: 38px;
+}
+
+.hotel_name {  
+  font-size: 2rem;
+}
+
+.city_name {  
+  font-size: 1.6rem;
+}
+
+.desc {  
+  font-size: 1.2rem;
+}
+
+.view_button {
+  font-size: 1.4rem;
+}
+
+.img_cont_desk {
+  width: 50%;
+    margin: 0 25%;
+}
+
+.detail_group {
+  margin-left: 25%;
+  font-size: 18px;
+}
+
+.room_details span {
+  font-size: 14px;
+}
+
+.form_cont_desk {
+  margin: 0 25%;    
+}
+
+.reserve_container {
+  width: 70%;
+    margin: 0 15%;
+}
+
+.hotel_form {
+  width: 40%;
+    margin: 0 25%;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 5%;
+}
+
+.name_label {
+  font-size: 24px;
+}
+
+.form-control {
+  font-size: 24px;
+}
+
+.create_button,
+.btn {
+  font-size: 24px;
+}
+
+.sign_in_form {
+  width: 40%;
+    margin: 0 30%;
+}
+
+.hotel_info_container p {
+  font-size: 18px;
+}
+   
+}

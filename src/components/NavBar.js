@@ -24,10 +24,9 @@ const NavBar = () => {
   };
 
   return (
-    <Navbar bg="primary" expand="lg" variant="dark">
+    <Navbar expand="lg" variant="dark" style={{backgroundColor: "#943d24"}}>
       <Container>
-        <Navbar.Brand href="/">BOOooKa.com</Navbar.Brand>
-        <AccountCircle style={{ color: 'white' }} />
+        <Navbar.Brand href="/">BOOooKa.com</Navbar.Brand>        
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
