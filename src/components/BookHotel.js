@@ -51,7 +51,7 @@ const BookHotel = () => {
       { room && (
       <div className="detail_container" style={{ marginTop: '5%' }}>
 
-        <div className="img_container">
+        <div className="img_container img_cont_desk">
           <img src={`data:image/png;base64,${base64String}`} alt={room.title} />
         </div>
 

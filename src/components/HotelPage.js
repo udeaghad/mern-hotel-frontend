@@ -58,7 +58,7 @@ const HotelPage = () => {
       <div className="detail_container">
         <h1 className="hotel_name">{hotel.name}</h1>
 
-        <div className="img_container">
+        <div className="img_container img_cont_desk">
           <img src={`data:image/png;base64,${base64String}`} alt={hotel.name} />
         </div>
 
