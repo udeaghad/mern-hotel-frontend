@@ -14,7 +14,7 @@ const HotelPage = () => {
   if (hotel) {
     base64String = btoa(String.fromCharCode(...hotel.photos.image.data.data));
   }
-  
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
