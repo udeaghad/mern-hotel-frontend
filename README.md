@@ -24,7 +24,7 @@ To get a local copy up and running follow these simple steps.
 - You can check if Git is installed by running the following command in the terminal.
 - `$ git --version`
 - Clone the repo from here.
-- `$ git clone https://github.com/maenkhraisha/mern-hotel-frontend.git`
+- `$ git clone https://github.com/udeaghad/mern-hotel-frontend.git`
 
 # Usage
 ## Run locally
