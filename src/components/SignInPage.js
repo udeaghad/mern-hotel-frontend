@@ -26,13 +26,12 @@ const SignInPage = () => {
     e.preventDefault();
 
     try {
-      await axios.post('https://booooka-api.onrender.com/api/v1/auths/login', body, { withCredentials: true });
+      await axios.post('https://booooka-api.onrender.com/api/v1/auths/login', body, { withCredentials: true })
         .then((res) => {
-          const data = res.data;
+          const { data } = res;
 
           dispatch(getUser(data));
           localStorage.setItem('user', JSON.stringify(data));
-
         });
       navigate('/');
     } catch (error) {
