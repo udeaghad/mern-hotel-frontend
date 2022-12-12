@@ -32,11 +32,22 @@ const CreateRoom = () => {
     data: '',
   });
 
+  const transformFile = (file) => {
+    const reader = new FileReader();
+
+    if (file) {
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setFile({
+          preview: URL.createObjectURL(file),
+          data: reader.result,
+        });
+      };
+    }
+  };
+
   const handlePhotos = (e) => {
-    setFile({
-      preview: URL.createObjectURL(e.target.files[0]),
-      data: e.target.files[0],
-    });
+    transformFile(e.target.files[0]);
   };
 
   const [msg, setMsg] = useState('');
@@ -44,17 +55,16 @@ const CreateRoom = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append('title', body.title);
-    formData.append('maxPeople', body.maxPeople);
-    formData.append('desc', body.desc);
-    formData.append('price', body.price);
-    formData.append('photos', file.data);
+    const newBody = { ...body, photos: file.data };
+
     try {
       const res = await axios.post(
-        `https://booooka-api.onrender.com/api/v1/rooms/${chooseHotel}`, formData, { withCredentials: true },
+        `https://booooka-api.onrender.com/api/v1/rooms/${chooseHotel}`, newBody, { withCredentials: true },
         { headers: { 'Content-Type': 'multipart/form-data' } },
       );
+      // const res = await axios.post(
+      //   `http://localhost:5000/api/v1/rooms/${chooseHotel}`, newBody, { withCredentials: true },
+      // );
       const data = await res.data;
 
       setMsg(data.message);

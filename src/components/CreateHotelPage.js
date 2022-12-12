@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const CreateHotel = () => {
   const navigate = useNavigate();
-
+  //  eslint-disable-next-line
   const [body, setBody] = useState({
     name: '',
     desc: '',
@@ -14,17 +14,33 @@ const CreateHotel = () => {
   });
 
   const [file, setFile] = useState({
-    preview: '',
-    photos: '',
+    preview: null,
+    photos: null,
   });
 
-  const handlePhotos = (e) => {
-    setFile({
-      preview: URL.createObjectURL(e.target.files[0]),
-      photos: e.target.files[0],
-    });
+  const transformFile = (file) => {
+    const reader = new FileReader();
+
+    if (file) {
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setFile({
+          preview: URL.createObjectURL(file),
+          photos: reader.result,
+        });
+      };
+    } else {
+      setFile({
+        preview: null,
+        photos: null,
+      });
+    }
   };
 
+  const handlePhotos = (e) => {
+    transformFile(e.target.files[0]);
+  };
+  //  eslint-disable-next-line
   const [msg, setMsg] = useState('');
 
   const handleChange = (e) => {
@@ -37,30 +53,17 @@ const CreateHotel = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-
-    formData.append('name', body.name);
-    formData.append('desc', body.desc);
-    formData.append('address', body.address);
-    formData.append('city', body.city);
-    formData.append('cheapest_price', body.cheapest_price);
-    formData.append('photos', file.photos);
-    // formData.append("file", file.photos.name)
-
+    const newBody = { ...body, photos: file.photos };
     try {
-      const res = await axios.post('https://booooka-api.onrender.com/api/v1/hotels', formData, { withCredentials: true },
-        {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        });
+      // const res = await axios.post('http://localhost:5000/api/v1/hotels', newBody, { withCredentials: true });
+      const res = await axios.post('https://booooka-api.onrender.com/api/v1/hotels', newBody, { withCredentials: true });
       const data = await res.data;
-
       setMsg(data.message);
-      e.target.reset();
-      return data;
     } catch (error) {
       throw new Error(error.message);
     }
+
+    e.target.reset();
   };
 
   const handleCancel = () => {
@@ -113,7 +116,7 @@ const CreateHotel = () => {
         <div className="form-group">
           <label htmlFor="photos" className="name_label">
             Upload photos
-            <input type="file" placeholder="Upload ohotos" name="photos" onChange={handlePhotos} className="form-control-file" />
+            <input type="file" placeholder="Upload photos" name="photos" onChange={handlePhotos} className="form-control-file" />
           </label>
         </div>
 

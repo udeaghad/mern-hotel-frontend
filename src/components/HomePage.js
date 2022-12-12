@@ -26,6 +26,7 @@ const HomePage = () => {
     e.preventDefault();
     try {
       const res = await axios.delete(`https://booooka-api.onrender.com/api/v1/hotels/${e.target.id}`, { withCredentials: true });
+      // const res = await axios.delete(`http://localhost:5000/api/v1/hotels/${e.target.id}`, { withCredentials: true });
       const data = await res.data;
 
       setMsg(data);
@@ -56,14 +57,12 @@ const HomePage = () => {
         <motion.div ref={carousel} className="container-carousel">
 
           <motion.div drag="x" dragConstraints={{ right: 0, left: -width }} className="inner-carousel">
-            {hotels.map((hotel) => {
-              const base64String = btoa(String.fromCharCode(...hotel.photos.image.data.data));
-              return (
+            {hotels.map((hotel) => (
                 // eslint-disable-next-line
                 <motion.div key={hotel._id} className="card">
                   <h3 className="hotel_name">{hotel.name}</h3>
                   <motion.div className="img_container" whileTap={{ scale: 1.1 }}>
-                    <img src={`data:images/jpeg;base64,${base64String}`} alt={`${hotel.name}`} />
+                    <img src={hotel.photos} alt={`${hotel.name}`} />
                   </motion.div>
                   <h4 className="city_name">{hotel.city}</h4>
                   <p className="desc">
@@ -77,8 +76,7 @@ const HomePage = () => {
                     <button type="button" className="view_button" id={hotel._id} onClick={handleDelete} style={{ backgroundColor: 'unset' }}>Delete</button>
                   </div>
                 </motion.div>
-              );
-            })}
+            ))}
           </motion.div>
         </motion.div>
       </div>

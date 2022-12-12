@@ -11,6 +11,8 @@ const ReservationPage = () => {
   useEffect(() => {
     // eslint-disable-next-line
     axios.get(`https://booooka-api.onrender.com/api/v1/reservations/${user._id}`, { withCredentials: true })
+    // eslint-disable-next-line
+    // axios.get(`http://localhost:5000/api/v1/reservations/${user._id}`, { withCredentials: true })
       .then((res) => {
         const { data } = res;
         setReservations(data);
@@ -30,15 +32,7 @@ const ReservationPage = () => {
   return (
     <>
 
-      {reservations && reservations.map((reservation) => {
-        const room64String = btoa(String.fromCharCode(
-          ...reservation.room.photos.data.data,
-        ));
-        const hotel64String = btoa(String.fromCharCode(
-          ...reservation.hotel.photos.image.data.data,
-        ));
-
-        return (
+      {reservations && reservations.map((reservation) => (
           // eslint-disable-next-line
           <div key={reservation._id} className="reserve_container">
             <h3 style={{ margin: '5%' }}>Reservation Details</h3>
@@ -64,7 +58,7 @@ const ReservationPage = () => {
                 </p>
               </div>
               <div className="hotel_img_container">
-                <img src={`data:image/png;base64,${hotel64String}`} alt={reservation.hotel.name} style={{ width: '100%' }} />
+                <img src={reservation.hotel.photos} alt={reservation.hotel.name} style={{ width: '100%' }} />
               </div>
 
             </div>
@@ -93,7 +87,7 @@ const ReservationPage = () => {
               </div>
 
               <div className="hotel_img_container">
-                <img src={`data:image/png;base64,${room64String}`} alt={reservation.room.title} style={{ width: '100%' }} />
+                <img src={reservation.room.photos} alt={reservation.room.title} style={{ width: '100%' }} />
               </div>
             </div>
 
@@ -102,8 +96,7 @@ const ReservationPage = () => {
               <button id={reservation._id} type="button" onClick={handleDelete} className="create_button">Delete</button>
             </div>
           </div>
-        );
-      })}
+      ))}
 
     </>
   );

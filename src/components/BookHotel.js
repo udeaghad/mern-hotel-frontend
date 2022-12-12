@@ -5,11 +5,6 @@ import { useNavigate } from 'react-router-dom';
 
 const BookHotel = () => {
   const room = useSelector((state) => state.room);
-  let base64String = '';
-  if (room) {
-    base64String = btoa(String.fromCharCode(...room.photos.data.data));
-  }
-
   const [bookDate, setBookDate] = useState();
 
   const hotel = useSelector((state) => state.hotel);
@@ -32,6 +27,7 @@ const BookHotel = () => {
 
     try {
       await axios.post('https://booooka-api.onrender.com/api/v1/reservations/', body, { withCredentials: true })
+      // await axios.post('http://localhost:5000/api/v1/reservations/', body, { withCredentials: true })
         .then((res) => {
           const { data } = res;
           return data;
@@ -52,7 +48,7 @@ const BookHotel = () => {
       <div className="detail_container" style={{ marginTop: '5%' }}>
 
         <div className="img_container img_cont_desk">
-          <img src={`data:image/png;base64,${base64String}`} alt={room.title} />
+          <img src={room.photos} alt={room.title} />
         </div>
 
         <div className="detail_group" style={{ gap: '10px' }}>
