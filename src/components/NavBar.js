@@ -23,7 +23,7 @@ const NavBar = () => {
   };
 
   return (
-    <Navbar expand="lg" variant="dark" style={{ backgroundColor: '#943d24' }}>
+    <Navbar expand="lg" variant="dark" style={{ backgroundColor: '#943d24' }} data-testid="nav-bar">
       <Container>
         <Navbar.Brand href="/">BOOooKa.com</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
