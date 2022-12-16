@@ -10,11 +10,6 @@ const HotelPage = () => {
   const [msg, setMsg] = useState('');
   const hotel = useSelector((state) => state.hotel);
 
-  // let base64String = '';
-  // if (hotel) {
-  //   base64String = btoa(String.fromCharCode(...hotel.photos.image.data.data));
-  // }
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

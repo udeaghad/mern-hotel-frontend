@@ -56,7 +56,7 @@ const HomePage = () => {
         <motion.div ref={carousel} className="container-carousel">
 
           <motion.div drag="x" dragConstraints={{ right: 0, left: -width }} className="inner-carousel">
-            {hotels.map((hotel) => (
+            {hotels.map((hotel, index) => (
                 // eslint-disable-next-line
                 <motion.div key={hotel._id} className="card">
                   <h3 className="hotel_name">{hotel.name}</h3>
@@ -76,7 +76,7 @@ const HomePage = () => {
                       id={hotel._id} 
                       onClick={handleClick} 
                       style={{ backgroundColor: 'unset' }}
-                      data-testid="view-button"
+                      data-testid={`view-button-${index}`}
                       >
                         View and Book
                     </button>

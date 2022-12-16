@@ -1,12 +1,12 @@
 import React from 'react';
-import { Provider } from  'react-redux';
 import renderer from 'react-test-renderer';
+import { Provider } from  'react-redux';
 import store from '../redux/ConfigureStore'
 import NavBar from '../components/NavBar'
 import { BrowserRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
 
-describe("To test the home page component", () =>{
+describe("To test the Nav Bar component", () =>{
   test('To test Home page renders successfully!', () => {    
     const tree = renderer
       .create(

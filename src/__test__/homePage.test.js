@@ -5,6 +5,15 @@ import store from '../redux/ConfigureStore'
 import Homepage from '../components/HomePage'
 import { BrowserRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
+import configureStore from 'redux-mock-store'
+import thunk from 'redux-thunk';
+import {getAllHotels} from '../redux/hotels/hotelsAction'
+
+
+  const middlewares = [thunk] // add your middlewares like `redux-thunk`
+  const mockStore = configureStore(middlewares)   
+
+
 
 
 describe("To test the home page component", () =>{
@@ -45,4 +54,22 @@ describe("To test the home page component", () =>{
     const text = getByTestId('main_card_container')    
     expect(text.innerHTML).toContain("carousel")
   })
+
+  // it('should execute fetch data', () => {
+  //   const newStore = mockStore([])
+
+  //   return newStore.dispatch( getAllHotels())
+  //   .then(() => {
+  //     const actions = newStore.getActions()
+  //     console.log(actions)
+  //     expect(actions[0]).toEqual(success())
+  //   })
+    
+    // const actions =  newStore.getActions()
+    //   console.log(actions)
+    //   expect(actions.length).toEqual(2)
+   
+  
+  // })
+
 })
