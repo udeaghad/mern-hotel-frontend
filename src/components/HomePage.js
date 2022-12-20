@@ -2,17 +2,23 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { getHotels, getAllHotels, deleteHotelAction } from '../redux/hotels/hotelsAction';
 import axios from 'axios';
+import { getHotels, deleteHotelAction } from '../redux/hotels/hotelsAction';
+import { fetchPosts } from '../redux/hotels/hotelsReducer';
+// import { getAllHotelsAction } from '../redux/hotels/hotelsReducer';
+
 const HomePage = () => {
   const [msg, setMsg] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const hotels = useSelector((state) => state.allHotels);
+  const { allHotels, isLoading } = useSelector((state) => state.allHotels);
 
   useEffect(() => {
-    dispatch(getAllHotels());
-  }, [dispatch]);
+    if (isLoading) {
+      dispatch(fetchPosts());
+    }
+  }, [dispatch, isLoading]);
+  // dispatch(fetchPosts());
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -41,10 +47,10 @@ const HomePage = () => {
   const carousel = useRef();
 
   useEffect(() => {
-    if (hotels.length > 0) {
+    if (allHotels.length > 0) {
       setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
     }
-  }, [hotels]);
+  }, [allHotels]);
 
   return (
     <div>
@@ -56,7 +62,7 @@ const HomePage = () => {
         <motion.div ref={carousel} className="container-carousel">
 
           <motion.div drag="x" dragConstraints={{ right: 0, left: -width }} className="inner-carousel">
-            {hotels.map((hotel, index) => (
+            {allHotels.map((hotel, index) => (
                 // eslint-disable-next-line
                 <motion.div key={hotel._id} className="card">
                   <h3 className="hotel_name">{hotel.name}</h3>
@@ -70,14 +76,7 @@ const HomePage = () => {
                   </p>
                   <div className="btn_container">
                     {/* eslint-disable-next-line */}
-                    <button 
-                      type="button" 
-                      className="view_button" 
-                      id={hotel._id} 
-                      onClick={handleClick} 
-                      style={{ backgroundColor: 'unset' }}
-                      data-testid={`view-button-${index}`}
-                      >
+                    <button type="button" className="view_button" id={hotel._id} onClick={handleClick} style={{ backgroundColor: 'unset' }} data-testid={`view-button-${index}`}>
                         View and Book
                     </button>
                     {/* eslint-disable-next-line */}

@@ -1,14 +1,14 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import { hotelsReducer, allHotelsReducer } from './hotels/hotelsReducer';
+import allHotelsSlice from './hotels/hotelsReducer';
 import roomsReducer from './rooms/roomsReducer';
 import usersReducer from './auths/usersReducer';
 
 const rootReducer = combineReducers({
   // Add reducers here
-  hotel: hotelsReducer,
+  // hotel: hotelsReducer,
   room: roomsReducer,
   user: usersReducer,
-  allHotels: allHotelsReducer,
+  allHotels: allHotelsSlice.reducer,
 });
 
 const store = configureStore({
