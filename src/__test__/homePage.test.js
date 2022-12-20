@@ -7,10 +7,10 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import store from '../redux/ConfigureStore';
 import Homepage from '../components/HomePage';
-import { getAllHotels } from '../redux/hotels/hotelsAction';
+// import { getAllHotels } from '../redux/hotels/hotelsAction';
 
 const middlewares = [thunk]; // add your middlewares like `redux-thunk`
-const mockStore = configureStore(middlewares);
+// const mockStore = configureStore(middlewares);
 
 describe('To test the home page component', () => {
   test('To test Home page renders successfully!', () => {
