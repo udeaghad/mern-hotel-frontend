@@ -75,7 +75,7 @@ const CreateRoom = () => {
     }
   };
 
-  const allHotels = useSelector((state) => state.allHotels);
+  const { allHotels } = useSelector((state) => state.allHotels);
 
   const handleCancel = () => {
     navigate('/');

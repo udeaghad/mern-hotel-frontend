@@ -4,12 +4,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import getRoom from '../redux/rooms/roomsAction';
-import { deleteRoomAction } from '../redux/hotels/hotelsAction';
+// import { deleteRoomAction } from '../redux/hotels/hotelsAction';
 
 const HotelPage = () => {
   const [msg, setMsg] = useState('');
-  const hotel = useSelector((state) => state.hotel);
-
+  const { hotel, isLoading } = useSelector((state) => state.hotel);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -29,7 +28,7 @@ const HotelPage = () => {
       // const res = await axios.delete(`http://localhost:5000/api/v1/rooms/${e.target.id}/${hotel._id}`, { withCredentials: true });
       const data = await res.data;
 
-      dispatch(deleteRoomAction(e.target.id));
+      // dispatch(deleteRoomAction(e.target.id));
       setMsg(data);
       return data;
     } catch (error) {
@@ -43,10 +42,10 @@ const HotelPage = () => {
   const roomCarousel = useRef();
 
   useEffect(() => {
-    if (hotel && hotel.rooms.length > 0) {
+    if (!isLoading && hotel.rooms.length > 0) {
       setWidth(roomCarousel.current.scrollWidth - roomCarousel.current.offsetWidth);
     }
-  }, [hotel]);
+  }, [hotel, isLoading]);
 
   return (
     <>

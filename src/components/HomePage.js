@@ -3,16 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
-import { getHotels, deleteHotelAction } from '../redux/hotels/hotelsAction';
-import { fetchPosts } from '../redux/hotels/hotelsReducer';
-// import { getAllHotelsAction } from '../redux/hotels/hotelsReducer';
+import { getHotel } from '../redux/hotels/hotelReducer';
+import { fetchPosts, getAllHotelsAction } from '../redux/hotels/allHotelsReducer';
 
 const HomePage = () => {
   const [msg, setMsg] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { allHotels, isLoading } = useSelector((state) => state.allHotels);
-
   useEffect(() => {
     if (isLoading) {
       dispatch(fetchPosts());
@@ -23,7 +21,7 @@ const HomePage = () => {
   const handleClick = (e) => {
     e.preventDefault();
 
-    dispatch(getHotels(e.target.id));
+    dispatch(getHotel(e.target.id));
     navigate('/hotels');
   };
 
@@ -35,7 +33,7 @@ const HomePage = () => {
       const data = await res.data;
 
       setMsg(data);
-      dispatch(deleteHotelAction(e.target.id));
+      dispatch(getAllHotelsAction.deleteHotel(e.target.id));
       return data;
     } catch (error) {
       throw new Error(error.message);

@@ -3,13 +3,13 @@ import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
 import { BrowserRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
-import configureStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
+// import configureStore from 'redux-mock-store';
+// import thunk from 'redux-thunk';
 import store from '../redux/ConfigureStore';
 import Homepage from '../components/HomePage';
 // import { getAllHotels } from '../redux/hotels/hotelsAction';
 
-const middlewares = [thunk]; // add your middlewares like `redux-thunk`
+// const middlewares = [thunk]; // add your middlewares like `redux-thunk`
 // const mockStore = configureStore(middlewares);
 
 describe('To test the home page component', () => {
