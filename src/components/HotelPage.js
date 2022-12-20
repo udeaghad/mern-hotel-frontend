@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import getRoom from '../redux/rooms/roomsAction';
-// import { deleteRoomAction } from '../redux/hotels/hotelsAction';
+import { getHotelAction } from '../redux/hotels/hotelReducer';
 
 const HotelPage = () => {
   const [msg, setMsg] = useState('');
@@ -26,9 +26,9 @@ const HotelPage = () => {
       const res = await axios.delete(`https://booooka-api.onrender.com/api/v1/rooms/${e.target.id}/${hotel._id}`, { withCredentials: true });
       // eslint-disable-next-line
       // const res = await axios.delete(`http://localhost:5000/api/v1/rooms/${e.target.id}/${hotel._id}`, { withCredentials: true });
-      const data = await res.data;
+      const { data } = await res;
 
-      // dispatch(deleteRoomAction(e.target.id));
+      dispatch(getHotelAction.deleteRoom(e.target.id));
       setMsg(data);
       return data;
     } catch (error) {

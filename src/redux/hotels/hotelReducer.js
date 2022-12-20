@@ -20,7 +20,7 @@ const hotelSlice = createSlice({
   name: 'hotel',
   initialState,
   reducers: {
-    deleteHotelAction: (state, action) => (
+    deleteRoom: (state, action) => (
       // eslint-disable-next-line
       {...state, hotel: { ...state.hotel, rooms: [...state.hotel.rooms.filter((room) => room._id !== action.payload)] }}
     ),
