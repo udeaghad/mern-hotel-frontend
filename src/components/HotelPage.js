@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import getRoom from '../redux/rooms/roomsAction';
+import { getRoom } from '../redux/rooms/roomsReducer';
 import { getHotelAction } from '../redux/hotels/hotelReducer';
 
 const HotelPage = () => {
