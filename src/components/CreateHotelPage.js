@@ -68,6 +68,10 @@ const CreateHotel = () => {
     }
 
     e.target.reset();
+    setFile({
+      preview: null,
+      photos: null,
+    });
   };
 
   const handleCancel = () => {

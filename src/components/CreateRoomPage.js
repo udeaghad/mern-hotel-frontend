@@ -69,6 +69,10 @@ const CreateRoom = () => {
 
       setMsg(data.message);
       e.target.reset();
+      setFile({
+        preview: null,
+        data: null,
+      });
       return data;
     } catch (error) {
       throw new Error(error.message);
