@@ -24,6 +24,9 @@ const allHotelsSlice = createSlice({
       // eslint-disable-next-line
       { ...state, allHotels: state.allHotels.filter((hotel)=> hotel._id !== action.payload) }
     ),
+    addHotel: (state, action) => (
+      { ...state, allHotels: [...state.allHotels, action.payload] }
+    ),
 
   },
   extraReducers: (builder) => {

@@ -4,7 +4,7 @@ import axios from 'axios';
 import moment from 'moment';
 
 const ReservationPage = () => {
-  const user = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
 
   const [reservations, setReservations] = useState([]);
 

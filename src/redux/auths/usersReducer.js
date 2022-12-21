@@ -1,12 +1,17 @@
-const user = JSON.parse(localStorage.getItem('user')) || null;
+import { createSlice } from '@reduxjs/toolkit';
 
-const usersReducer = (state = user, action) => {
-  switch (action.type) {
-    case 'GET_USER':
-      return action.payload;
-    default:
-      return state;
-  }
+const initialState = {
+  user: JSON.parse(localStorage.getItem('user')) || null,
 };
 
-export default usersReducer;
+const userSlice = createSlice({
+  name: 'user',
+  initialState,
+  reducers: {
+    getUser: (state, action) => ({ ...state, user: action.payload }),
+  },
+});
+
+const getUserAction = userSlice.actions;
+
+export { userSlice as default, getUserAction };

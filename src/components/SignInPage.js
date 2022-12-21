@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import getUser from '../redux/auths/usersAction';
+import { getUserAction } from '../redux/auths/usersReducer';
 
 const SignInPage = () => {
   const [body, setBody] = useState({
@@ -31,7 +31,7 @@ const SignInPage = () => {
         .then((res) => {
           const { data } = res;
 
-          dispatch(getUser(data));
+          dispatch(getUserAction.getUser(data));
           localStorage.setItem('user', JSON.stringify(data));
         });
       navigate('/');

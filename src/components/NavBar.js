@@ -5,16 +5,16 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import getUser from '../redux/auths/usersAction';
+import { getUserAction } from '../redux/auths/usersReducer';
 
 const NavBar = () => {
-  const user = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const handleSignOut = async () => {
     localStorage.removeItem('user');
 
-    dispatch(getUser(null));
+    dispatch(getUserAction.getUser(null));
     try {
       await axios.post('https://booooka-api.onrender.com/api/v1/auths/logout', { withCredentials: true });
     } catch (error) {

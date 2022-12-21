@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { getAllHotelsAction } from '../redux/hotels/allHotelsReducer';
 
 const CreateHotel = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   //  eslint-disable-next-line
   const [body, setBody] = useState({
@@ -58,6 +61,7 @@ const CreateHotel = () => {
       // const res = await axios.post('http://localhost:5000/api/v1/hotels', newBody, { withCredentials: true });
       const res = await axios.post('https://booooka-api.onrender.com/api/v1/hotels', newBody, { withCredentials: true });
       const data = await res.data;
+      dispatch(getAllHotelsAction.addHotel(data.hotel));
       setMsg(data.message);
     } catch (error) {
       throw new Error(error.message);

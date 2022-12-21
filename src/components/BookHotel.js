@@ -8,7 +8,7 @@ const BookHotel = () => {
   const [bookDate, setBookDate] = useState();
 
   const { hotel } = useSelector((state) => state.hotel);
-  const user = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
 
   const navigate = useNavigate();
 
