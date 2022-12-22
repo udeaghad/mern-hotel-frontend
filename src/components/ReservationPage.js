@@ -31,8 +31,10 @@ const ReservationPage = () => {
 
   return (
     <>
+      <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>View your Reservation</h3>
 
-      {reservations && reservations.map((reservation) => (
+      {reservations.length > 0
+        ? reservations.map((reservation) => (
           // eslint-disable-next-line
           <div key={reservation._id} className="reserve_container">
             <h3 style={{ margin: '5%' }}>Reservation Details</h3>
@@ -96,7 +98,8 @@ const ReservationPage = () => {
               <button id={reservation._id} type="button" onClick={handleDelete} className="create_button">Delete</button>
             </div>
           </div>
-      ))}
+        ))
+        : <p style={{ textAlign: 'center', marginTop: '5rem' }}>You do not have any reservation</p>}
 
     </>
   );

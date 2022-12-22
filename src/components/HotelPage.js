@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { getRoom } from '../redux/rooms/roomsReducer';
 import { getHotelAction } from '../redux/hotels/hotelReducer';
+import CircularIndeterminate from './material-ui/LoadingCircularBar';
 
 const HotelPage = () => {
   const [msg, setMsg] = useState('');
@@ -50,6 +51,20 @@ const HotelPage = () => {
   return (
     <>
       {msg && <p>{msg}</p>}
+
+      {isLoading && (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}
+      >
+        <CircularIndeterminate />
+      </div>
+      )}
+
       {hotel && (
       <div className="detail_container">
         <h1 className="hotel_name">{hotel.name}</h1>
