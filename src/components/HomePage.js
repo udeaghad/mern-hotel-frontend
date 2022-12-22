@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import axios from 'axios';
 import { getHotel } from '../redux/hotels/hotelReducer';
 import { fetchPosts, getAllHotelsAction } from '../redux/hotels/allHotelsReducer';
+import CircularIndeterminate from './material-ui/LoadingCircularBar';
 
 const HomePage = () => {
   const [msg, setMsg] = useState('');
@@ -56,6 +57,20 @@ const HomePage = () => {
       {msg && <p>{msg}</p>}
 
       <p className="heading_text" data-testid="heading-text">...you wanna book a hotel</p>
+
+      {isLoading && (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}
+      >
+        <CircularIndeterminate />
+      </div>
+      )}
+
       <div className="main_card_container" data-testid="main_card_container">
         <motion.div ref={carousel} className="container-carousel">
 

@@ -7,6 +7,7 @@ import { render } from '@testing-library/react';
 // import thunk from 'redux-thunk';
 import store from '../redux/ConfigureStore';
 import Homepage from '../components/HomePage';
+// import { fetchPosts } from '../redux/hotels/allHotelsReducer';
 // import { getAllHotels } from '../redux/hotels/hotelsAction';
 
 // const middlewares = [thunk]; // add your middlewares like `redux-thunk`
@@ -54,7 +55,7 @@ describe('To test the home page component', () => {
   // it('should execute fetch data', () => {
   //   const newStore = mockStore([])
 
-  //   return newStore.dispatch( getAllHotels())
+  //   return newStore.dispatch(fetchPosts())
   //   .then(() => {
   //     const actions = newStore.getActions()
   //     console.log(actions)
