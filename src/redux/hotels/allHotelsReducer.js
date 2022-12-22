@@ -31,9 +31,9 @@ const allHotelsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchPosts.pending, (state) => ({ ...state, isLoading: false }))
+      .addCase(fetchPosts.pending, (state) => ({ ...state, isLoading: true }))
       .addCase(fetchPosts.fulfilled, (state, action) => (
-        { ...state, allHotels: action.payload, isLoading: true }
+        { ...state, allHotels: action.payload, isLoading: false }
       ));
   },
 });
