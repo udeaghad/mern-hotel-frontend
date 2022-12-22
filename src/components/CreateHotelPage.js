@@ -2,11 +2,17 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
+import IconButton from '@mui/material/IconButton';
+import Collapse from '@mui/material/Collapse';
+import CloseIcon from '@mui/icons-material/Close';
 import { getAllHotelsAction } from '../redux/hotels/allHotelsReducer';
 
 const CreateHotel = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [open, setOpen] = useState(true);
   //  eslint-disable-next-line
   const [body, setBody] = useState({
     name: '',
@@ -81,7 +87,30 @@ const CreateHotel = () => {
   return (
     <>
       <h1>Create Hotel</h1>
-      {msg && <p>{msg}</p>}
+      {msg
+        && (
+          <Box sx={{ width: '100%' }}>
+            <Collapse in={open}>
+              <Alert
+                action={(
+                  <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    size="small"
+                    onClick={() => {
+                      setOpen(false);
+                    }}
+                  >
+                    <CloseIcon fontSize="inherit" />
+                  </IconButton>
+              )}
+                sx={{ mb: 2 }}
+              >
+                {msg}
+              </Alert>
+            </Collapse>
+          </Box>
+        )}
 
       <form onSubmit={onSubmit} className="hotel_form">
         <div className="form-group">

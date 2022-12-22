@@ -2,9 +2,16 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
+import IconButton from '@mui/material/IconButton';
+import Collapse from '@mui/material/Collapse';
+import CloseIcon from '@mui/icons-material/Close';
 
 const CreateRoom = () => {
   const navigate = useNavigate();
+  const [msg, setMsg] = useState('');
+  const [open, setOpen] = useState(true);
   const [body, setBody] = useState({
     title: '',
     desc: '',
@@ -50,8 +57,6 @@ const CreateRoom = () => {
     transformFile(e.target.files[0]);
   };
 
-  const [msg, setMsg] = useState('');
-
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -88,7 +93,30 @@ const CreateRoom = () => {
   return (
     <>
       <h1>Create Room</h1>
-      {msg && <p>{msg}</p>}
+      {msg
+        && (
+          <Box sx={{ width: '100%' }}>
+            <Collapse in={open}>
+              <Alert
+                action={(
+                  <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    size="small"
+                    onClick={() => {
+                      setOpen(false);
+                    }}
+                  >
+                    <CloseIcon fontSize="inherit" />
+                  </IconButton>
+              )}
+                sx={{ mb: 2 }}
+              >
+                {msg}
+              </Alert>
+            </Collapse>
+          </Box>
+        )}
 
       <form onSubmit={onSubmit} className="hotel_form">
         <div className="form-group">

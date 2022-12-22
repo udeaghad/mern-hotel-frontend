@@ -3,11 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
+import IconButton from '@mui/material/IconButton';
+import Collapse from '@mui/material/Collapse';
+import CloseIcon from '@mui/icons-material/Close';
 import { getHotel } from '../redux/hotels/hotelReducer';
 import { fetchPosts, getAllHotelsAction } from '../redux/hotels/allHotelsReducer';
 import CircularIndeterminate from './material-ui/LoadingCircularBar';
 
 const HomePage = () => {
+  const [open, setOpen] = useState(true);
   const [msg, setMsg] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -54,7 +60,30 @@ const HomePage = () => {
   return (
     <div>
 
-      {msg && <p>{msg}</p>}
+      {msg
+        && (
+          <Box sx={{ width: '100%' }}>
+            <Collapse in={open}>
+              <Alert
+                action={(
+                  <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    size="small"
+                    onClick={() => {
+                      setOpen(false);
+                    }}
+                  >
+                    <CloseIcon fontSize="inherit" />
+                  </IconButton>
+              )}
+                sx={{ mb: 2 }}
+              >
+                {msg}
+              </Alert>
+            </Collapse>
+          </Box>
+        )}
 
       <p className="heading_text" data-testid="heading-text">...you wanna book a hotel</p>
 

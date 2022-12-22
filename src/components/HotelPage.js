@@ -2,21 +2,32 @@ import axios from 'axios';
 import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
+import IconButton from '@mui/material/IconButton';
+import Collapse from '@mui/material/Collapse';
+import CloseIcon from '@mui/icons-material/Close';
 import { motion } from 'framer-motion';
 import { getRoom } from '../redux/rooms/roomsReducer';
 import { getHotelAction } from '../redux/hotels/hotelReducer';
 import CircularIndeterminate from './material-ui/LoadingCircularBar';
 
 const HotelPage = () => {
+  const [open, setOpen] = useState(true);
   const [msg, setMsg] = useState('');
   const { hotel, isLoading } = useSelector((state) => state.hotel);
+  const { user } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleClick = (e) => {
     e.preventDefault();
-    dispatch(getRoom(e.target.id));
-    navigate('/bookhotel');
+    if (user) {
+      dispatch(getRoom(e.target.id));
+      navigate('/bookhotel');
+    } else {
+      navigate('/signup');
+    }
   };
 
   const handleDelete = async (e) => {
@@ -50,7 +61,30 @@ const HotelPage = () => {
 
   return (
     <>
-      {msg && <p>{msg}</p>}
+      {msg
+        && (
+          <Box sx={{ width: '100%' }}>
+            <Collapse in={open}>
+              <Alert
+                action={(
+                  <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    size="small"
+                    onClick={() => {
+                      setOpen(false);
+                    }}
+                  >
+                    <CloseIcon fontSize="inherit" />
+                  </IconButton>
+              )}
+                sx={{ mb: 2 }}
+              >
+                {msg}
+              </Alert>
+            </Collapse>
+          </Box>
+        )}
 
       {isLoading && (
       <div
