@@ -8,12 +8,15 @@ const initialState = {
 const msgSlice = createSlice({
   name: 'message',
   initialState,
-  reducers:{
-    getSuccessMsg: (state, action) => ({...state, successMsg: action.payload, errorMsg: null}),
-    getErrorMsg: (state, action) => ({...state, successMsg: null, errorMsg: action.payload}),
-  }
-})
+  reducers: {
+    getSuccessMsg: (state, action) => ({ ...state, successMsg: action.payload, errorMsg: null }),
+    getErrorMsg: (state, action) => ({ ...state, successMsg: null, errorMsg: action.payload }),
+    resetMsg: (state, action) => (
+      { ...state, successMsg: action.payload, errorMsg: action.payload }
+    ),
+  },
+});
 
 const msgAction = msgSlice.actions;
 
-export { msgSlice as default, msgAction }
+export { msgSlice as default, msgAction };

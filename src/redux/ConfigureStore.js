@@ -3,7 +3,7 @@ import allHotelsSlice from './hotels/allHotelsReducer';
 import hotelSlice from './hotels/hotelReducer';
 import roomSlice from './rooms/roomsReducer';
 import userSlice from './auths/usersReducer';
-import msgSlice from './msgHandler/msgReducer'
+import msgSlice from './msgHandler/msgReducer';
 
 const rootReducer = combineReducers({
   // Add reducers here

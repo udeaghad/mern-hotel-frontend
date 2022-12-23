@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { msgAction } from '../redux/msgHandler/msgReducer';
 
 const BookHotel = () => {
+  const dispatch = useDispatch();
   const { room } = useSelector((state) => state.room);
   const [bookDate, setBookDate] = useState();
 
@@ -32,8 +34,10 @@ const BookHotel = () => {
           const { data } = res;
           return data;
         });
+      dispatch(msgAction.getSuccessMsg('Room booked successfully'));
       navigate('/reservations');
     } catch (error) {
+      dispatch(msgAction.getErrorMsg('Error! Room could not be booked'));
       throw new Error(error.message);
     }
   };

@@ -10,7 +10,7 @@ import SignUpPage from './components/SignUpPage';
 import ReservationPage from './components/ReservationPage';
 import CreateHotel from './components/CreateHotelPage';
 import CreateRoom from './components/CreateRoomPage';
-import Message from './components/material-ui/MsgHandling'
+import Message from './components/material-ui/MsgHandling';
 
 const App = () => (
   <div className="App">

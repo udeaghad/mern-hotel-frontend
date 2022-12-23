@@ -3,15 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
-import Box from '@mui/material/Box';
-import Alert from '@mui/material/Alert';
-import IconButton from '@mui/material/IconButton';
-import Collapse from '@mui/material/Collapse';
-import CloseIcon from '@mui/icons-material/Close';
 import { getHotel } from '../redux/hotels/hotelReducer';
 import { fetchPosts, getAllHotelsAction } from '../redux/hotels/allHotelsReducer';
 import CircularIndeterminate from './material-ui/LoadingCircularBar';
-import { messageAction, msgAction } from '../redux/msgHandler/msgReducer'
+import { msgAction } from '../redux/msgHandler/msgReducer';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -38,11 +33,11 @@ const HomePage = () => {
       // const res = await axios.delete(`http://localhost:5000/api/v1/hotels/${e.target.id}`, { withCredentials: true });
       const data = await res.data;
 
-      dispatch(msgAction.getSuccessMsg(data));
       dispatch(getAllHotelsAction.deleteHotel(e.target.id));
+      dispatch(msgAction.getSuccessMsg(data));
       return data;
     } catch (error) {
-      dispatch(msgAction.getErrorMsg(error.message));
+      dispatch(msgAction.getErrorMsg('Error occured! Hotel was not deleted'));
       throw new Error(error.message);
     }
   };

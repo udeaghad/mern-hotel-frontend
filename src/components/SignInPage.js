@@ -3,8 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { getUserAction } from '../redux/auths/usersReducer';
+import { msgAction } from '../redux/msgHandler/msgReducer';
 
 const SignInPage = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [body, setBody] = useState({
     username: '',
     password: '',
@@ -19,9 +22,6 @@ const SignInPage = () => {
     );
   };
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -33,9 +33,11 @@ const SignInPage = () => {
 
           dispatch(getUserAction.getUser(data));
           localStorage.setItem('user', JSON.stringify(data));
+          dispatch(msgAction.getSuccessMsg(`Success! ${body.username} signed in successfully`));
         });
       navigate('/');
     } catch (error) {
+      dispatch(msgAction.getErrorMsg('Error occured! User not signed in. Check your username or password'));
       throw new Error(error.message);
     }
   };

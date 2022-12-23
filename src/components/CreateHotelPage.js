@@ -2,17 +2,12 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Alert from '@mui/material/Alert';
-import IconButton from '@mui/material/IconButton';
-import Collapse from '@mui/material/Collapse';
-import CloseIcon from '@mui/icons-material/Close';
 import { getAllHotelsAction } from '../redux/hotels/allHotelsReducer';
+import { msgAction } from '../redux/msgHandler/msgReducer';
 
 const CreateHotel = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [open, setOpen] = useState(true);
   //  eslint-disable-next-line
   const [body, setBody] = useState({
     name: '',
@@ -68,8 +63,9 @@ const CreateHotel = () => {
       const res = await axios.post('https://booooka-api.onrender.com/api/v1/hotels', newBody, { withCredentials: true });
       const data = await res.data;
       dispatch(getAllHotelsAction.addHotel(data.hotel));
-      setMsg(data.message);
+      dispatch(msgAction.getSuccessMsg(data.message));
     } catch (error) {
+      dispatch(msgAction.getErrorMsg('Error! Hotel could not created'));
       throw new Error(error.message);
     }
 
@@ -87,31 +83,7 @@ const CreateHotel = () => {
   return (
     <>
       <h1>Create Hotel</h1>
-      {msg
-        && (
-          <Box sx={{ width: '100%' }}>
-            <Collapse in={open}>
-              <Alert
-                action={(
-                  <IconButton
-                    aria-label="close"
-                    color="inherit"
-                    size="small"
-                    onClick={() => {
-                      setOpen(false);
-                    }}
-                  >
-                    <CloseIcon fontSize="inherit" />
-                  </IconButton>
-              )}
-                sx={{ mb: 2 }}
-              >
-                {msg}
-              </Alert>
-            </Collapse>
-          </Box>
-        )}
-
+      
       <form onSubmit={onSubmit} className="hotel_form">
         <div className="form-group">
           <label htmlFor="name" className="name_label">

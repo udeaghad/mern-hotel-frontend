@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Alert from '@mui/material/Alert';
-import IconButton from '@mui/material/IconButton';
-import Collapse from '@mui/material/Collapse';
-import CloseIcon from '@mui/icons-material/Close';
+import { msgAction } from '../redux/msgHandler/msgReducer';
 
 const CreateRoom = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [msg, setMsg] = useState('');
-  const [open, setOpen] = useState(true);
   const [body, setBody] = useState({
     title: '',
     desc: '',
@@ -72,7 +67,7 @@ const CreateRoom = () => {
       // );
       const data = await res.data;
 
-      setMsg(data.message);
+      dispatch(msgAction.getSuccessMsg(data.message));
       e.target.reset();
       setFile({
         preview: null,
@@ -80,6 +75,7 @@ const CreateRoom = () => {
       });
       return data;
     } catch (error) {
+      dispatch(msgAction.getErrorMsg('Error! Room could not be created'));
       throw new Error(error.message);
     }
   };
@@ -93,30 +89,6 @@ const CreateRoom = () => {
   return (
     <>
       <h1>Create Room</h1>
-      {msg
-        && (
-          <Box sx={{ width: '100%' }}>
-            <Collapse in={open}>
-              <Alert
-                action={(
-                  <IconButton
-                    aria-label="close"
-                    color="inherit"
-                    size="small"
-                    onClick={() => {
-                      setOpen(false);
-                    }}
-                  >
-                    <CloseIcon fontSize="inherit" />
-                  </IconButton>
-              )}
-                sx={{ mb: 2 }}
-              >
-                {msg}
-              </Alert>
-            </Collapse>
-          </Box>
-        )}
 
       <form onSubmit={onSubmit} className="hotel_form">
         <div className="form-group">

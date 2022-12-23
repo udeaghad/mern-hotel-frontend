@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { msgAction } from '../redux/msgHandler/msgReducer';
 
 const SignUpPage = () => {
+  const dispatch = useDispatch();
   const [body, setBody] = useState({
     username: '',
     email: '',
@@ -25,9 +28,11 @@ const SignUpPage = () => {
     try {
       const res = await axios.post('https://booooka-api.onrender.com/api/v1/auths/register', body, { withCredentials: true });
       const data = await res.data;
+      dispatch(msgAction.getSuccessMsg('Account created successfully'));
       navigate('/signin');
       return data;
     } catch (error) {
+      dispatch(msgAction.getErrorMsg('Error occurred! Account could not created'));
       throw new Error(error.message);
     }
   };

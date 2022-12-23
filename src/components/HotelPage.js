@@ -2,19 +2,13 @@ import axios from 'axios';
 import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Alert from '@mui/material/Alert';
-import IconButton from '@mui/material/IconButton';
-import Collapse from '@mui/material/Collapse';
-import CloseIcon from '@mui/icons-material/Close';
 import { motion } from 'framer-motion';
 import { getRoom } from '../redux/rooms/roomsReducer';
 import { getHotelAction } from '../redux/hotels/hotelReducer';
 import CircularIndeterminate from './material-ui/LoadingCircularBar';
+import { msgAction } from '../redux/msgHandler/msgReducer';
 
 const HotelPage = () => {
-  const [open, setOpen] = useState(true);
-  const [msg, setMsg] = useState('');
   const { hotel, isLoading } = useSelector((state) => state.hotel);
   const { user } = useSelector((state) => state.user);
   const navigate = useNavigate();
@@ -26,7 +20,8 @@ const HotelPage = () => {
       dispatch(getRoom(e.target.id));
       navigate('/bookhotel');
     } else {
-      navigate('/signup');
+      navigate('/signin');
+      dispatch(msgAction.getErrorMsg('You need to sign in or create an account'));
     }
   };
 
@@ -41,9 +36,10 @@ const HotelPage = () => {
       const { data } = await res;
 
       dispatch(getHotelAction.deleteRoom(e.target.id));
-      setMsg(data);
+      dispatch(msgAction.getSuccessMsg(data));
       return data;
     } catch (error) {
+      dispatch(msgAction.getErrorMsg('Error occured! Hotel was not deleted'));
       throw new Error(error.message);
     }
   };
@@ -61,32 +57,9 @@ const HotelPage = () => {
 
   return (
     <>
-      {msg
-        && (
-          <Box sx={{ width: '100%' }}>
-            <Collapse in={open}>
-              <Alert
-                action={(
-                  <IconButton
-                    aria-label="close"
-                    color="inherit"
-                    size="small"
-                    onClick={() => {
-                      setOpen(false);
-                    }}
-                  >
-                    <CloseIcon fontSize="inherit" />
-                  </IconButton>
-              )}
-                sx={{ mb: 2 }}
-              >
-                {msg}
-              </Alert>
-            </Collapse>
-          </Box>
-        )}
 
-      {isLoading && (
+      {isLoading
+      && (
       <div
         style={{
           display: 'flex',
