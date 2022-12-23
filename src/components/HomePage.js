@@ -26,6 +26,13 @@ const HomePage = () => {
     navigate('/hotels');
   };
 
+  const handleEdit = (e) => {
+    e.preventDefault();
+
+    dispatch(getHotel(e.target.id));
+    navigate('/edithotel');
+  };
+
   const handleDelete = async (e) => {
     e.preventDefault();
     try {
@@ -89,6 +96,10 @@ const HomePage = () => {
                     {/* eslint-disable-next-line */}
                     <button type="button" className="view_button" id={hotel._id} onClick={handleClick} style={{ backgroundColor: 'unset' }} data-testid={`view-button-${index}`}>
                         View and Book
+                    </button>
+                    {/* eslint-disable-next-line */}
+                    <button type="button" className="view_button" id={hotel._id} onClick={handleEdit} style={{ backgroundColor: 'unset' }} data-testid={`view-button-${index}`}>
+                        Edit
                     </button>
                     {/* eslint-disable-next-line */}
                     <button type="button" className="view_button" id={hotel._id} onClick={handleDelete} style={{ backgroundColor: 'unset' }}>Delete</button>
