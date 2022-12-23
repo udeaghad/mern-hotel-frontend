@@ -10,10 +10,12 @@ import SignUpPage from './components/SignUpPage';
 import ReservationPage from './components/ReservationPage';
 import CreateHotel from './components/CreateHotelPage';
 import CreateRoom from './components/CreateRoomPage';
+import Message from './components/material-ui/MsgHandling'
 
 const App = () => (
   <div className="App">
     <NavBar />
+    <Message />
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/hotels" element={<HotelPage />} />

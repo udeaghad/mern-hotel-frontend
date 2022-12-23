@@ -11,10 +11,9 @@ import CloseIcon from '@mui/icons-material/Close';
 import { getHotel } from '../redux/hotels/hotelReducer';
 import { fetchPosts, getAllHotelsAction } from '../redux/hotels/allHotelsReducer';
 import CircularIndeterminate from './material-ui/LoadingCircularBar';
+import { messageAction, msgAction } from '../redux/msgHandler/msgReducer'
 
 const HomePage = () => {
-  const [open, setOpen] = useState(true);
-  const [msg, setMsg] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { allHotels, isLoading } = useSelector((state) => state.allHotels);
@@ -39,10 +38,11 @@ const HomePage = () => {
       // const res = await axios.delete(`http://localhost:5000/api/v1/hotels/${e.target.id}`, { withCredentials: true });
       const data = await res.data;
 
-      setMsg(data);
+      dispatch(msgAction.getSuccessMsg(data));
       dispatch(getAllHotelsAction.deleteHotel(e.target.id));
       return data;
     } catch (error) {
+      dispatch(msgAction.getErrorMsg(error.message));
       throw new Error(error.message);
     }
   };
@@ -59,32 +59,6 @@ const HomePage = () => {
 
   return (
     <div>
-
-      {msg
-        && (
-          <Box sx={{ width: '100%' }}>
-            <Collapse in={open}>
-              <Alert
-                action={(
-                  <IconButton
-                    aria-label="close"
-                    color="inherit"
-                    size="small"
-                    onClick={() => {
-                      setOpen(false);
-                    }}
-                  >
-                    <CloseIcon fontSize="inherit" />
-                  </IconButton>
-              )}
-                sx={{ mb: 2 }}
-              >
-                {msg}
-              </Alert>
-            </Collapse>
-          </Box>
-        )}
-
       <p className="heading_text" data-testid="heading-text">...you wanna book a hotel</p>
 
       {isLoading && (

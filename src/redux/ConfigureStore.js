@@ -3,6 +3,7 @@ import allHotelsSlice from './hotels/allHotelsReducer';
 import hotelSlice from './hotels/hotelReducer';
 import roomSlice from './rooms/roomsReducer';
 import userSlice from './auths/usersReducer';
+import msgSlice from './msgHandler/msgReducer'
 
 const rootReducer = combineReducers({
   // Add reducers here
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   room: roomSlice.reducer,
   user: userSlice.reducer,
   allHotels: allHotelsSlice.reducer,
+  msg: msgSlice.reducer,
 });
 
 const store = configureStore({
