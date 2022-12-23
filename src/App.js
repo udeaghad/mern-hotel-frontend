@@ -11,6 +11,7 @@ import ReservationPage from './components/ReservationPage';
 import CreateHotel from './components/CreateHotelPage';
 import CreateRoom from './components/CreateRoomPage';
 import Message from './components/material-ui/MsgHandling';
+import EditHotel from './components/EditHotel';
 
 const App = () => (
   <div className="App">
@@ -25,6 +26,7 @@ const App = () => (
       <Route path="/reservations" element={<ReservationPage />} />
       <Route path="/createhotel" element={<CreateHotel />} />
       <Route path="/createroom" element={<CreateRoom />} />
+      <Route path='/edithotel' element={<EditHotel />} />
     </Routes>
 
   </div>
