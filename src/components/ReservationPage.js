@@ -1,25 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import moment from 'moment';
+import { msgAction } from '../redux/msgHandler/msgReducer';
 
 const ReservationPage = () => {
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 
   const [reservations, setReservations] = useState([]);
 
   useEffect(() => {
+    if (user) {
     // eslint-disable-next-line
     axios.get(`https://booooka-api.onrender.com/api/v1/reservations/${user._id}`, { withCredentials: true })
-    // eslint-disable-next-line
+      // eslint-disable-next-line
     // axios.get(`http://localhost:5000/api/v1/reservations/${user._id}`, { withCredentials: true })
-      .then((res) => {
-        const { data } = res;
-        setReservations(data);
-      })
-      .catch((err) => {
-        throw new Error(err.message);
-      });
+        .then((res) => {
+          const { data } = res;
+          setReservations(data);
+        })
+        .catch((err) => {
+          throw new Error(err.message);
+        });
+    }
   }, [user]);
 
   const handleDelete = (e) => {
@@ -27,6 +31,7 @@ const ReservationPage = () => {
     axios.delete(`https://booooka-api.onrender.com/api/v1/reservations/${e.target.id}`, { withCredentials: true });
     // eslint-disable-next-line
     setReservations(reservations.filter((reservation) => reservation._id !== e.target.id));
+    dispatch(msgAction.getSuccessMsg('Reservation deleted successfully'));
   };
 
   return (

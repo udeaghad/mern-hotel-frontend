@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -11,7 +11,6 @@ import { msgAction } from '../redux/msgHandler/msgReducer';
 const NavBar = () => {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleSignOut = async () => {
     localStorage.removeItem('user');
@@ -24,12 +23,6 @@ const NavBar = () => {
     }
   };
 
-  const handleReservation = () => {
-    if (!user) {
-      navigate('/signin');
-    }
-  };
-
   return (
     <Navbar expand="lg" variant="dark" style={{ backgroundColor: '#943d24' }} data-testid="nav-bar">
       <Container>
@@ -38,7 +31,6 @@ const NavBar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <NavLink className="text-white text-decoration-none text-center py-2 mx-2" to="/">Home</NavLink>
-            <NavLink className="text-white text-decoration-none text-center py-2 mx-2" to="/reservations" onClick={handleReservation}>Reservations</NavLink>
             <NavLink className="text-white text-decoration-none text-center py-2 mx-2" to="/createhotel">Add Hotel</NavLink>
             <NavLink className="text-white text-decoration-none text-center py-2 mx-2" to="/createroom">Add Room</NavLink>
             {!user
@@ -50,7 +42,7 @@ const NavBar = () => {
               )
               : (
                 <>
-
+                  <NavLink className="text-white text-decoration-none text-center py-2 mx-2" to="/reservations">Reservations</NavLink>
                   <NavLink className="text-white text-decoration-none text-center py-2 mx-2" to="/" onClick={handleSignOut}>Sign Out</NavLink>
                 </>
               )}

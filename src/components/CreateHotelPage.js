@@ -83,7 +83,7 @@ const CreateHotel = () => {
   return (
     <>
       <h1>Create Hotel</h1>
-      
+
       <form onSubmit={onSubmit} className="hotel_form">
         <div className="form-group">
           <label htmlFor="name" className="name_label">
