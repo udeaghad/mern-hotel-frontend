@@ -55,6 +55,14 @@ const HotelPage = () => {
     }
   }, [hotel, isLoading]);
 
+  const handleEdit = (e) => {
+    e.preventDefault();
+
+    dispatch(getRoom(e.target.id));
+
+    navigate('/editroom');
+  };
+
   return (
     <>
 
@@ -124,7 +132,9 @@ const HotelPage = () => {
                       {/* eslint-disable-next-line */}
                       <button id={room._id} onClick={handleClick} className="button">Book</button>
                       {/* eslint-disable-next-line */}
-                      <button id={room._id} onClick={handleDelete} className="button">Delete Room</button>
+                      <button id={room._id} onClick={handleEdit} className="button">Edit</button>
+                      {/* eslint-disable-next-line */}
+                      <button id={room._id} onClick={handleDelete} className="button">Delete</button>
                     </div>
                   </motion.div>
               ))}

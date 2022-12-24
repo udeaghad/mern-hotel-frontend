@@ -12,6 +12,7 @@ import CreateHotel from './components/CreateHotelPage';
 import CreateRoom from './components/CreateRoomPage';
 import Message from './components/material-ui/MsgHandling';
 import EditHotel from './components/EditHotel';
+import EditRoom from './components/EditRoom';
 
 const App = () => (
   <div className="App">
@@ -27,6 +28,7 @@ const App = () => (
       <Route path="/createhotel" element={<CreateHotel />} />
       <Route path="/createroom" element={<CreateRoom />} />
       <Route path="/edithotel" element={<EditHotel />} />
+      <Route path="/editroom" element={<EditRoom />} />
     </Routes>
 
   </div>
