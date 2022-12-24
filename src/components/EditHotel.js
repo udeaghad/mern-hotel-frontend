@@ -1,28 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { getAllHotelsAction } from '../redux/hotels/allHotelsReducer';
+import { msgAction } from '../redux/msgHandler/msgReducer';
 
 const EditHotel = () => {
-  const dispatch = useDispatch();
   const { hotel } = useSelector((state) => state.hotel);
+  const dispatch = useDispatch();
+  console.log(hotel);
   const [changed, setChanged] = useState(false);
 
-  const [tempBody, setTempBody] = useState({
-    name: hotel.name,
-    address: hotel.address,
-    city: hotel.city,
-    cheapest_price: hotel.cheapest_price,
-    desc: hotel.desc,
-    photos: hotel.photos,
-  });
+  const [tempBody, setTempBody] = useState(null);
 
   useEffect(() => {
-    if (hotel) {
-      console.log(tempBody);
-      console.log(changed);
-    }
-  });
+    setTempBody(hotel);
+  }, [hotel]);
+  console.log(tempBody);
 
   const [file] = useState({
     preview: '',
@@ -45,8 +38,10 @@ const EditHotel = () => {
       const data = await res.data;
       console.log(data.hotel);
       dispatch(getAllHotelsAction.updateHotel(data.hotel));
+      dispatch(msgAction.getSuccessMsg(`${tempBody.name} was updated successfully`));
     } catch (error) {
-      console.error(error.message);
+      dispatch(msgAction.getErrorMsg('Error! Hotel failed to update'));
+      throw new Error(error.message);
     }
   };
 
@@ -62,7 +57,8 @@ const EditHotel = () => {
 
     <>
       <h3>Edit Hotel Information</h3>
-
+      { tempBody
+      && (
       <form onSubmit={onSubmit} className="hotel_form">
         <div className="form-group">
           <label htmlFor="name" className="name_label">
@@ -111,12 +107,12 @@ const EditHotel = () => {
         </div>
 
         <div className="btn_container">
-          <button className="create_button" type="submit">Save</button>
+          { changed && <button className="create_button" type="submit">Save</button> }
           <button type="button" onClick={handleCancel} className="btn btn-danger"> Cancel</button>
         </div>
 
       </form>
-
+      )}
     </>
   );
 };

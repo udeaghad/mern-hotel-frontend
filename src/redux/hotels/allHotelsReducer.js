@@ -27,14 +27,18 @@ const allHotelsSlice = createSlice({
     addHotel: (state, action) => (
       { ...state, allHotels: [...state.allHotels, action.payload] }
     ),
-    updateHotel: (state, action) => {
-      // eslint-disable-next-line
-      let existingItem = state.allHotels.find((item) => (item._id === action.payload._id))
-      if (existingItem) {
-        existingItem = action.payload;
+    updateHotel: (state, action) => (
+      {
+        ...state,
+        allHotels: state.allHotels.map((hotel) => {
+          // eslint-disable-next-line
+          if (hotel._id === action.payload._id) {
+            return action.payload;
+          }
+          return hotel;
+        }),
       }
-    },
-
+    ),
   },
   extraReducers: (builder) => {
     builder
