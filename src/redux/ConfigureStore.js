@@ -7,10 +7,10 @@ import msgSlice from './msgHandler/msgReducer';
 
 const rootReducer = combineReducers({
   // Add reducers here
+  allHotels: allHotelsSlice.reducer,
   hotel: hotelSlice.reducer,
   room: roomSlice.reducer,
   user: userSlice.reducer,
-  allHotels: allHotelsSlice.reducer,
   msg: msgSlice.reducer,
 });
 

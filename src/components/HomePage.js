@@ -12,6 +12,7 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { allHotels, isLoading } = useSelector((state) => state.allHotels);
+  console.log(allHotels);
   useEffect(() => {
     if (isLoading) {
       dispatch(fetchPosts());
@@ -20,10 +21,16 @@ const HomePage = () => {
   // dispatch(fetchPosts());
 
   const handleClick = (e) => {
-    e.preventDefault();
-
+    // e.preventDefault();
     dispatch(getHotel(e.target.id));
     navigate('/hotels');
+  };
+
+  const handleEdit = (e) => {
+    // e.preventDefault();
+
+    dispatch(getHotel(e.target.id));
+    navigate('/edithotel');
   };
 
   const handleDelete = async (e) => {
@@ -32,7 +39,7 @@ const HomePage = () => {
       const res = await axios.delete(`https://booooka-api.onrender.com/api/v1/hotels/${e.target.id}`, { withCredentials: true });
       // const res = await axios.delete(`http://localhost:5000/api/v1/hotels/${e.target.id}`, { withCredentials: true });
       const data = await res.data;
-
+      // dispatch(getAllHotelsAction.deleteHotel())
       dispatch(getAllHotelsAction.deleteHotel(e.target.id));
       dispatch(msgAction.getSuccessMsg(data));
       return data;
@@ -87,8 +94,12 @@ const HomePage = () => {
                   </p>
                   <div className="btn_container">
                     {/* eslint-disable-next-line */}
-                    <button type="button" className="view_button" id={hotel._id} onClick={handleClick} style={{ backgroundColor: 'unset' }} data-testid={`view-button-${index}`}>
+                    <button type="button" className="view_button book-btn" id={hotel._id} onClick={handleClick} style={{ backgroundColor: 'unset' }} data-testid={`view-button-${index}`}>
                         View and Book
+                    </button>
+                    {/* eslint-disable-next-line */}
+                    <button type="button" className="view_button edit-btn" id={hotel._id} onClick={handleEdit} style={{ backgroundColor: 'unset' }} data-testid={`view-button-${index}`}>
+                        Edit
                     </button>
                     {/* eslint-disable-next-line */}
                     <button type="button" className="view_button" id={hotel._id} onClick={handleDelete} style={{ backgroundColor: 'unset' }}>Delete</button>
