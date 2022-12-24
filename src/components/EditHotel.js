@@ -10,12 +10,25 @@ const EditHotel = () => {
   console.log(hotel);
   const [changed, setChanged] = useState(false);
 
-  const [tempBody, setTempBody] = useState(null);
+  const [tempBody, setTempBody] = useState({
+    name: '',
+    address: '',
+    city: '',
+    cheapest_price: '',
+    desc: '',
+    photos: '',
+  });
 
   useEffect(() => {
-    setTempBody(hotel);
+    setTempBody({
+      name: hotel.name,
+      address: hotel.address,
+      city: hotel.city,
+      cheapest_price: hotel.cheapest_price,
+      desc: hotel.desc,
+      photos: hotel.photos,
+    });
   }, [hotel]);
-  console.log(tempBody);
 
   const [file] = useState({
     preview: '',
