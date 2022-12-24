@@ -126,7 +126,7 @@ const EditHotel = () => {
 
         <div className="form-group">
           <label htmlFor="photos" className="name_label">
-            Upload photos
+            Update photos
             <input type="file" placeholder="Upload photos" name="photos" onChange={handlePhotos} className="form-control-file" />
           </label>
         </div>
