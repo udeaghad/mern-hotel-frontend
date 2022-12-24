@@ -12,7 +12,6 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { allHotels, isLoading } = useSelector((state) => state.allHotels);
-  console.log(allHotels);
   useEffect(() => {
     if (isLoading) {
       dispatch(fetchPosts());

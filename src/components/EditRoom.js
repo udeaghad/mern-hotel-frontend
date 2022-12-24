@@ -15,8 +15,6 @@ const EditRoom = () => {
     setTempBody(room);
   }, [room]);
 
-  console.log(tempBody);
-
   const [file, setFile] = useState({
     preview: null,
     data: null,
@@ -30,8 +28,6 @@ const EditRoom = () => {
     }));
     setChanged(true);
   };
-
-  console.log(tempBody);
 
   const transformFile = (file) => {
     const reader = new FileReader();

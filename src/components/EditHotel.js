@@ -12,7 +12,6 @@ const EditHotel = () => {
   const [changed, setChanged] = useState(false);
 
   const [tempBody, setTempBody] = useState({});
-  console.log(tempBody);
 
   useEffect(() => {
     setTempBody(hotel);
@@ -63,12 +62,11 @@ const EditHotel = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const newBody = { ...tempBody, photos: file.photos ? file.photos : hotel.photos };
-    console.log(newBody);
     try {
       //  eslint-disable-next-line
       const res = await axios.put(`https://booooka-api.onrender.com/api/v1/hotels/${hotel._id}`, newBody, { withCredentials: true });
       const data = await res.data;
-      console.log(data.hotel);
+
       dispatch(getAllHotelsAction.updateHotel(data.hotel));
       dispatch(msgAction.getSuccessMsg(`${tempBody.name} was updated successfully`));
       setChanged(false);
