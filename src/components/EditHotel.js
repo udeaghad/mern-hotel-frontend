@@ -1,39 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { getAllHotelsAction } from '../redux/hotels/allHotelsReducer';
 import { msgAction } from '../redux/msgHandler/msgReducer';
 
 const EditHotel = () => {
+  const navigate = useNavigate();
   const { hotel } = useSelector((state) => state.hotel);
   const dispatch = useDispatch();
-  console.log(hotel);
   const [changed, setChanged] = useState(false);
 
-  const [tempBody, setTempBody] = useState({
-    name: '',
-    address: '',
-    city: '',
-    cheapest_price: '',
-    desc: '',
-    photos: '',
-  });
+  const [tempBody, setTempBody] = useState({});
+  console.log(tempBody);
 
   useEffect(() => {
-    setTempBody({
-      name: hotel.name,
-      address: hotel.address,
-      city: hotel.city,
-      cheapest_price: hotel.cheapest_price,
-      desc: hotel.desc,
-      photos: hotel.photos,
-    });
+    setTempBody(hotel);
   }, [hotel]);
 
-  const [file] = useState({
-    preview: '',
-    photos: '',
+  const [file, setFile] = useState({
+    preview: null,
+    photos: null,
   });
+
+  const transformFile = (file) => {
+    const reader = new FileReader();
+
+    if (file) {
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setFile({
+          preview: URL.createObjectURL(file),
+          photos: reader.result,
+        });
+      };
+    } else {
+      setFile({
+        preview: null,
+        photos: null,
+      });
+    }
+  };
   const handleChange = (e) => {
     e.preventDefault();
     setTempBody((prevState) => ({
@@ -45,25 +52,28 @@ const EditHotel = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    const newBody = { ...tempBody, photos: file.photos };
     try {
       //  eslint-disable-next-line
-      const res = await axios.put(`https://booooka-api.onrender.com/api/v1/hotels/${hotel._id}`, tempBody, { withCredentials: true });
+      const res = await axios.put(`https://booooka-api.onrender.com/api/v1/hotels/${hotel._id}`, newBody, { withCredentials: true });
       const data = await res.data;
       console.log(data.hotel);
       dispatch(getAllHotelsAction.updateHotel(data.hotel));
       dispatch(msgAction.getSuccessMsg(`${tempBody.name} was updated successfully`));
+      setChanged(false);
     } catch (error) {
       dispatch(msgAction.getErrorMsg('Error! Hotel failed to update'));
       throw new Error(error.message);
     }
   };
 
-  const handlePhotos = () => {
-
+  const handlePhotos = (e) => {
+    transformFile(e.target.files[0]);
+    setChanged(true);
   };
 
   const handleCancel = () => {
-
+    navigate('/');
   };
 
   return (
@@ -121,7 +131,7 @@ const EditHotel = () => {
 
         <div className="btn_container">
           { changed && <button className="create_button" type="submit">Save</button> }
-          <button type="button" onClick={handleCancel} className="btn btn-danger"> Cancel</button>
+          <button type="button" onClick={handleCancel} className="btn btn-danger"> Go Back</button>
         </div>
 
       </form>
