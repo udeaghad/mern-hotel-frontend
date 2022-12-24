@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-// import { getAllHotelsAction } from '../redux/hotels/allHotelsReducer';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
+import { msgAction } from '../redux/msgHandler/msgReducer';
 
 const EditRoom = () => {
+  const dispatch = useDispatch();
   const { room } = useSelector((state) => state.room);
-  const { allHotels } = useSelector((state) => state.allHotels);
+
+  const [changed, setChanged] = useState(false);
+
   const [tempBody, setTempBody] = useState(null);
+
   useEffect(() => {
     setTempBody(room);
   }, [room]);
+
   console.log(tempBody);
-  const [file] = useState({
+
+  const [file, setFile] = useState({
     preview: null,
     data: null,
   });
@@ -21,24 +28,56 @@ const EditRoom = () => {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
+    setChanged(true);
   };
 
   console.log(tempBody);
 
-  const handlePhotos = () => {
+  const transformFile = (file) => {
+    const reader = new FileReader();
 
+    if (file) {
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setFile({
+          preview: URL.createObjectURL(file),
+          data: reader.result,
+        });
+      };
+    }
+  };
+
+  const handlePhotos = (e) => {
+    transformFile(e.target.files[0]);
+    setChanged(true);
   };
 
   const handleCancel = () => {
 
   };
 
-  const handleSelect = () => {
+  const onSubmit = async (e) => {
+    e.preventDefault();
 
-  };
+    const newBody = { ...tempBody, photos: file.data ? file.data : room.photos };
 
-  const onSubmit = () => {
-
+    try {
+      const res = await axios.put(
+        //  eslint-disable-next-line
+        `https://booooka-api.onrender.com/api/v1/rooms/${newBody._id}`, newBody, { withCredentials: true },
+        { headers: { 'Content-Type': 'multipart/form-data' } },
+      );
+      // const res = await axios.post(
+      //   `http://localhost:5000/api/v1/rooms/${chooseHotel}`, newBody, { withCredentials: true },
+      // );
+      const data = await res.data;
+      dispatch(msgAction.getSuccessMsg(`${room.title} updated successfully`));
+      setChanged(false);
+      return data;
+    } catch (error) {
+      dispatch(msgAction.getErrorMsg('Error! Room could not be updated'));
+      throw new Error(error.message);
+    }
   };
   return (
     <>
@@ -85,21 +124,8 @@ const EditRoom = () => {
           </label>
         </div>
 
-        <div className="form-group">
-
-          <select name="hotelID" onChange={handleSelect} style={{ marginTop: '1rem' }}>
-            <option value="">Select Hotel</option>
-            {allHotels.map((hotel) => (
-              // eslint-disable-next-line
-              <option key={hotel._id} value={hotel._id}>{hotel.name}</option>
-
-            ))}
-          </select>
-
-        </div>
-
         <div className="btn_container">
-          <button className="create_button" type="submit">Create new room</button>
+          { changed && <button className="create_button" type="submit">Save</button> }
           <button type="button" onClick={handleCancel} className="btn btn-danger"> Cancel</button>
         </div>
 
