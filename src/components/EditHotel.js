@@ -41,6 +41,7 @@ const EditHotel = () => {
       });
     }
   };
+
   const handleChange = (e) => {
     e.preventDefault();
     setTempBody((prevState) => ({
@@ -50,9 +51,19 @@ const EditHotel = () => {
     setChanged(true);
   };
 
+  const handlePhotos = (e) => {
+    transformFile(e.target.files[0]);
+    setChanged(true);
+  };
+
+  const handleCancel = () => {
+    navigate('/');
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
-    const newBody = { ...tempBody, photos: file.photos };
+    const newBody = { ...tempBody, photos: file.photos ? file.photos : hotel.photos };
+    console.log(newBody);
     try {
       //  eslint-disable-next-line
       const res = await axios.put(`https://booooka-api.onrender.com/api/v1/hotels/${hotel._id}`, newBody, { withCredentials: true });
@@ -65,15 +76,6 @@ const EditHotel = () => {
       dispatch(msgAction.getErrorMsg('Error! Hotel failed to update'));
       throw new Error(error.message);
     }
-  };
-
-  const handlePhotos = (e) => {
-    transformFile(e.target.files[0]);
-    setChanged(true);
-  };
-
-  const handleCancel = () => {
-    navigate('/');
   };
 
   return (
