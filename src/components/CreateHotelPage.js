@@ -59,7 +59,6 @@ const CreateHotel = () => {
     e.preventDefault();
     const newBody = { ...body, photos: file.photos };
     try {
-      // const res = await axios.post('http://localhost:5000/api/v1/hotels', newBody, { withCredentials: true });
       const res = await axios.post('https://booooka-api.onrender.com/api/v1/hotels', newBody, { withCredentials: true });
       const data = await res.data;
       dispatch(getAllHotelsAction.addHotel(data.hotel));

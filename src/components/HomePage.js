@@ -36,9 +36,9 @@ const HomePage = () => {
     e.preventDefault();
     try {
       const res = await axios.delete(`https://booooka-api.onrender.com/api/v1/hotels/${e.target.id}`, { withCredentials: true });
-      // const res = await axios.delete(`http://localhost:5000/api/v1/hotels/${e.target.id}`, { withCredentials: true });
+
       const data = await res.data;
-      // dispatch(getAllHotelsAction.deleteHotel())
+
       dispatch(getAllHotelsAction.deleteHotel(e.target.id));
       dispatch(msgAction.getSuccessMsg(data));
       return data;

@@ -14,8 +14,7 @@ const ReservationPage = () => {
     if (user) {
     // eslint-disable-next-line
     axios.get(`https://booooka-api.onrender.com/api/v1/reservations/${user._id}`, { withCredentials: true })
-      // eslint-disable-next-line
-    // axios.get(`http://localhost:5000/api/v1/reservations/${user._id}`, { withCredentials: true })
+
         .then((res) => {
           const { data } = res;
           setReservations(data);

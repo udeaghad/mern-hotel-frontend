@@ -32,7 +32,7 @@ const HotelPage = () => {
       // eslint-disable-next-line
       const res = await axios.delete(`https://booooka-api.onrender.com/api/v1/rooms/${e.target.id}/${hotel._id}`, { withCredentials: true });
       // eslint-disable-next-line
-      // const res = await axios.delete(`http://localhost:5000/api/v1/rooms/${e.target.id}/${hotel._id}`, { withCredentials: true });
+      
       const { data } = await res;
 
       dispatch(getHotelAction.deleteRoom(e.target.id));

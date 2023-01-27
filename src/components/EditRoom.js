@@ -63,9 +63,7 @@ const EditRoom = () => {
         `https://booooka-api.onrender.com/api/v1/rooms/${newBody._id}`, newBody, { withCredentials: true },
         { headers: { 'Content-Type': 'multipart/form-data' } },
       );
-      // const res = await axios.post(
-      //   `http://localhost:5000/api/v1/rooms/${chooseHotel}`, newBody, { withCredentials: true },
-      // );
+
       const data = await res.data;
       dispatch(msgAction.getSuccessMsg(`${room.title} updated successfully`));
       setChanged(false);

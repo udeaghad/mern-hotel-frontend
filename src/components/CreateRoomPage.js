@@ -62,11 +62,8 @@ const CreateRoom = () => {
         `https://booooka-api.onrender.com/api/v1/rooms/${chooseHotel}`, newBody, { withCredentials: true },
         { headers: { 'Content-Type': 'multipart/form-data' } },
       );
-      // const res = await axios.post(
-      //   `http://localhost:5000/api/v1/rooms/${chooseHotel}`, newBody, { withCredentials: true },
-      // );
+
       const data = await res.data;
-      console.log(data.room);
       dispatch(msgAction.getSuccessMsg(data.message));
       e.target.reset();
       setFile({
