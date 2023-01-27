@@ -66,7 +66,7 @@ const CreateRoom = () => {
       //   `http://localhost:5000/api/v1/rooms/${chooseHotel}`, newBody, { withCredentials: true },
       // );
       const data = await res.data;
-
+      console.log(data.room);
       dispatch(msgAction.getSuccessMsg(data.message));
       e.target.reset();
       setFile({

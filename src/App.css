@@ -51,6 +51,8 @@
 .img_container img {
   width: 100%;
   pointer-events: none;
+  aspect-ratio: 4/3;
+  object-fit: cover;
 }
 
 .button {
@@ -170,6 +172,13 @@
 
 .hotel_img_container {
   width: 50%;
+}
+
+.hotel_img_container img {
+  width: 100%;
+  pointer-events: none;
+  aspect-ratio: 4/3;
+  object-fit: cover;
 }
 
 .hotel_info_container {
